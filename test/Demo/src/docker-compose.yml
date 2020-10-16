@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+    consul:
+        image: consul:latest
+        command: consul agent -dev -log-level=info -ui -client=0.0.0.0
+        hostname: consul
+        container_name: consul
+        ports:
+            - "8500:8500"
+        networks: 
+            - consuldemonet01
+    gw:
+        image: consul-demo-gw
+        container_name: gw
+        environment: 
+            ASPNETCORE_ENVIRONMENT: Development
+            APP_LOG_PATH: logs/
+        ports: 
+            - "5000:80"
+        networks: 
+            - consuldemonet01
+    app1:
+        image: consul-demo-app
+        hostname: app1
+        container_name: app1
+        environment: 
+            ASPNETCORE_ENVIRONMENT: Development
+        networks: 
+            - consuldemonet01
+    app2:
+        image: consul-demo-app
+        hostname: app2
+        container_name: app2
+        environment: 
+            ASPNETCORE_ENVIRONMENT: Development
+        networks: 
+            - consuldemonet01
+    app3:
+        image: consul-demo-app
+        hostname: app3
+        container_name: app3
+        environment: 
+            ASPNETCORE_ENVIRONMENT: Development
+        networks: 
+            - consuldemonet01
+
+networks:
+  consuldemonet01:

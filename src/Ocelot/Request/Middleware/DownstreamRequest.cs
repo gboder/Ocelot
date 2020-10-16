@@ -30,6 +30,7 @@ namespace Ocelot.Request.Middleware
 
         public string Scheme { get; set; }
 
+        public string Address { get; set; }
         public string Host { get; set; }
 
         public int Port { get; set; }
@@ -48,7 +49,7 @@ namespace Ocelot.Request.Middleware
                 Host = Host,
                 Path = AbsolutePath,
                 Query = RemoveLeadingQuestionMark(Query),
-                Scheme = Scheme
+                Scheme = Scheme,
             };
 
             _request.RequestUri = uriBuilder.Uri;
