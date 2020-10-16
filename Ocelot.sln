@@ -88,6 +88,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "open-tracing", "open-tracin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotOpenTracing", "samples\OcelotOpenTracing\OcelotOpenTracing.csproj", "{C9427E78-4281-4F59-A66E-17C0B66550E5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gbo.Ocelot.Tests", "test\Gbo.Ocelot.Tests\Gbo.Ocelot.Tests.csproj", "{BD39727D-21A1-4789-BE7B-279FE3BE90E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -194,6 +196,10 @@ Global
 		{C9427E78-4281-4F59-A66E-17C0B66550E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9427E78-4281-4F59-A66E-17C0B66550E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9427E78-4281-4F59-A66E-17C0B66550E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD39727D-21A1-4789-BE7B-279FE3BE90E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD39727D-21A1-4789-BE7B-279FE3BE90E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD39727D-21A1-4789-BE7B-279FE3BE90E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD39727D-21A1-4789-BE7B-279FE3BE90E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -231,6 +237,7 @@ Global
 		{11C622AD-8C0A-4CF4-811B-3DBB76550797} = {5CFB79B7-C9DC-45A4-9A75-625D92471702}
 		{731C6A8A-69ED-445C-A132-C638AA93F9C7} = {8FA0CBA0-0338-48EB-B37F-83CA5022237C}
 		{C9427E78-4281-4F59-A66E-17C0B66550E5} = {731C6A8A-69ED-445C-A132-C638AA93F9C7}
+		{BD39727D-21A1-4789-BE7B-279FE3BE90E1} = {5B401523-36DA-4491-B73A-7590A26E420B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {21476EFF-778A-4F97-8A56-D1AF1CEC0C48}

@@ -1,0 +1,1 @@
+docker run -d --name consuldemo_gw_dev consul-demo-gw

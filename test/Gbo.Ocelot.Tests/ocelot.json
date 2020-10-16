@@ -1,0 +1,94 @@
+{
+    "Routes": [
+        {
+            "ServiceName": "app",
+            "DownstreamPathTemplate": "/weatherforecast",
+            "DownstreamScheme": "http",
+            "UpstreamPathTemplate": "/weatherforecast",
+            "UpstreamHttpMethod": [
+                "Get"
+            ],
+            "LoadBalancerOptions": {
+                "Type": "RoundRobin"
+            },
+            "DownstreamHeaderTransform": {
+                "X-Forwarded-For": "{RemoteIpAddress}",
+                "Host": "*, app.pr114.isago.ch"
+            }
+        },
+        {
+            "ServiceName": "app",
+            "DownstreamPathTemplate": "/info/health",
+            "DownstreamScheme": "http",
+            "UpstreamPathTemplate": "/health",
+            "UpstreamHttpMethod": [
+                "Get"
+            ],
+            "LoadBalancerOptions": {
+                "Type": "RoundRobin"
+            },
+            "DownstreamHeaderTransform": {
+                "X-Forwarded-For": "{RemoteIpAddress}",
+                "Host": "*, app.pr114.isago.ch"
+            }
+        },
+        {
+            "ServiceName": "app",
+            "DownstreamPathTemplate": "/info/header",
+            "DownstreamScheme": "http",
+            "UpstreamPathTemplate": "/down-header",
+            "UpstreamHttpMethod": [
+                "Get"
+            ],
+            "LoadBalancerOptions": {
+                "Type": "RoundRobin"
+            },
+            "DownstreamHeaderTransform": {
+                "X-Forwarded-For": "{RemoteIpAddress}",
+                "Host": "app.pr114.isago.ch"
+            }
+        },
+        {
+            "ServiceName": "app",
+            "DownstreamPathTemplate": "/info/header",
+            "DownstreamScheme": "http",
+            "UpstreamPathTemplate": "/up-header",
+            "UpstreamHttpMethod": [
+                "Get"
+            ],
+            "LoadBalancerOptions": {
+                "Type": "RoundRobin"
+            },
+            "UpstreamHeaderTransform": {
+                "X-Forwarded-For": "{RemoteIpAddress}",
+                "X-Forwarded-Host": "{UpstreamHost}",
+                "X-App-1": "OcelotValue",
+                "Host": "{UpstreamHost}, app.pr114.isago.ch"
+            }
+        },
+        {
+            "ServiceName": "app",
+            "DownstreamPathTemplate": "/info/{everything}",
+            "DownstreamScheme": "http",
+            "UpstreamPathTemplate": "/info/{everything}",
+            "UpstreamHttpMethod": [
+                "Get"
+            ],
+            "LoadBalancerOptions": {
+                "Type": "RoundRobin"
+            },
+            "DownstreamHeaderTransform": {
+                "X-Forwarded-For": "{RemoteIpAddress}",
+                "Host": "*, app.pr114.isago.ch"
+            }
+        }
+    ],
+    "GlobalConfiguration": {
+        "BaseUrl": "http://localhost:5000",
+        "ServiceDiscoveryProvider": {
+            "Host": "consul",
+            "Port": 8500,
+            "Type": "Consul"
+        }
+    }
+}
