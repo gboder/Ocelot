@@ -1,28 +1,49 @@
 version: '3.4'
 
 services:
+    rp01:
+        image: nginx:latest
+        hostname: rp01
+        container_name: rp01
+        ports:
+            - "8500:8500"
+        networks:
+            - net01
+        volumes:
+            - D:/temp/consuldemo/nginx/nginx.conf:/etc/nginx/nginx.conf
     consul01:
         image: consul:latest
-        command: consul agent -dev -log-level=info -ui -client=0.0.0.0
+        command: consul agent -server -client=0.0.0.0 -ui -node=server -datacenter=consuldemo01 -data-dir=/mnt/data/consul -bootstrap-expect=1
         hostname: consul01
         container_name: consul01
         ports:
             - "8510:8500"
         networks: 
-            - appnet01
-            - gwnet01
-            - consulnet01
+            - net01
+        volumes:
+            - D:/temp/consuldemo/consul01:/mnt/data/consul
     consul02:
         image: consul:latest
-        command: consul agent -dev -log-level=info -ui -client=0.0.0.0
+        command: consul agent -client=0.0.0.0 -ui -retry-join consul01 -node=client -datacenter=consuldemo01 -data-dir=/mnt/data/consul
         hostname: consul02
         container_name: consul02
         ports:
             - "8511:8500"
         networks: 
-            - appnet01
-            - gwnet01
-            - consulnet01
+            - net01
+        volumes:
+            - D:/temp/consuldemo/consul02:/mnt/data/consul
+    consul03:
+        image: consul:latest
+        command: consul agent -client=0.0.0.0 -retry-join consul02 -node=client2 -datacenter=consuldemo01 -data-dir=/mnt/data/consul
+        hostname: consul03
+        container_name: consul03
+        ports:
+            - "8512:8500"
+        networks: 
+            - net01
+        volumes:
+            - D:/temp/consuldemo/consul03:/mnt/data/consul
     gw:
         image: consul-demo-gw
         container_name: gw
@@ -32,35 +53,34 @@ services:
         ports: 
             - "5000:80"
         networks: 
-            - appnet01
-            - gwnet01
-            - consulnet01
+            - net01
     app1:
         image: consul-demo-app
         hostname: app1
         container_name: app1
         environment: 
             ASPNETCORE_ENVIRONMENT: Development
+            APP_CONSUL_HOST: rp01:8500
         networks: 
-            - appnet01
+            - net01
     app2:
         image: consul-demo-app
         hostname: app2
         container_name: app2
         environment: 
             ASPNETCORE_ENVIRONMENT: Development
+            APP_CONSUL_HOST: rp01:8500
         networks: 
-            - appnet01
+            - net01
     app3:
         image: consul-demo-app
         hostname: app3
         container_name: app3
         environment: 
             ASPNETCORE_ENVIRONMENT: Development
+            APP_CONSUL_HOST: rp01:8500
         networks: 
-            - appnet01
+            - net01
 
 networks:
-  consulnet01:
-  gwnet01:
-  appnet01:
+    net01:

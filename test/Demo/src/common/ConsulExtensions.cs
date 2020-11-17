@@ -30,7 +30,7 @@ namespace common
 
             services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(consulConfig =>
             {
-                consulConfig.Address = new Uri("http://consul01:8500");
+                consulConfig.Address = new Uri($"http://{Environment.GetEnvironmentVariable("APP_CONSUL_HOST")}");
             }));
 
             return services;
