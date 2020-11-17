@@ -30,7 +30,7 @@ namespace common
 
             services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(consulConfig =>
             {
-                consulConfig.Address = new Uri("http://consul:8500");
+                consulConfig.Address = new Uri("http://consul01:8500");
             }));
 
             return services;
@@ -56,7 +56,7 @@ namespace common
                 // Name = Configuration.ServiceName,
                 // Address = $"{uri.Host}",
                 // Port = uri.Port,
-                ID = $"ID_{address}",
+                ID = $"app@{address}:80",
                 Name = "app",
                 Address = address,
                 Port = 80,
@@ -70,6 +70,7 @@ namespace common
                     Interval = TimeSpan.FromSeconds(1),
                     Header = new Dictionary<string, List<string>>{ {"Host",new List<string>{"app.pr114.isago.ch"} } },
                     Method = "GET",
+
                 },
                 new AgentServiceCheck{
                     HTTP = $"http://{address}/info/header",
@@ -96,8 +97,8 @@ namespace common
                 }
             };
 
-            registration.Tags = new string[] { "http://app" };
-            registration.Meta = new Dictionary<string, string> { { "host-header", "http://app:80/" } };
+            // registration.Tags = new string[] { "http://app" };
+            // registration.Meta = new Dictionary<string, string> { { "host-header", "http://app:80/" } };
 
             logger.LogInformation($"Registering Service {registration.Name} with URL {registration.Address}:{registration.Port}");
             consulClient.Agent.ServiceDeregister(registration.ID).ConfigureAwait(true);

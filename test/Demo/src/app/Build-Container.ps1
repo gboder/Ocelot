@@ -1,3 +1,3 @@
-Remove-Item -Force -Recurse published
-dotnet publish -c release -o published --self-contained -r linux-x64 
-docker build -t consul-demo-app published
+dotnet clean
+dotnet publish -c debug --self-contained -r linux-x64
+docker build -t consul-demo-app .\bin\debug\netcoreapp3.1\linux-x64\publish\

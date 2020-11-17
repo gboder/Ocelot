@@ -51,6 +51,7 @@ namespace app
 
             app.UseAuthorization();
 
+            
             app.UseConsul(Environment.GetEnvironmentVariable("HOSTNAME") ?? throw new ArgumentNullException($"EnvVar: HOSTNAME is null."));
 
             app.UseEndpoints(endpoints =>
