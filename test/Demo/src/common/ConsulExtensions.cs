@@ -51,6 +51,8 @@ namespace common
             IApplicationLifetime lifetime = app.ApplicationServices.GetRequiredService<IApplicationLifetime>();
 #pragma warning restore CS0618 // Type or member is obsolete
 
+            var serviceName = Environment.GetEnvironmentVariable("APP_SERVICE_NAME");
+            serviceName = string.IsNullOrWhiteSpace(serviceName) ? "app" : serviceName;
 
             AgentServiceRegistration registration = new AgentServiceRegistration
             {
@@ -58,8 +60,8 @@ namespace common
                 // Name = Configuration.ServiceName,
                 // Address = $"{uri.Host}",
                 // Port = uri.Port,
-                ID = $"app@{address}:80",
-                Name = "app",
+                ID = $"{serviceName}@{address}:80",
+                Name = serviceName,
                 Address = address,
                 Port = 80,
             };
@@ -72,7 +74,7 @@ namespace common
                     Interval = TimeSpan.FromSeconds(1),
                     Header = new Dictionary<string, List<string>>{ {"Host",new List<string>{"app.pr114.isago.ch"} } },
                     Method = "GET",
-
+                    Notes=$"http://{address}/info/env",
                 },
                 new AgentServiceCheck{
                     HTTP = $"http://{address}/info/header",
@@ -80,6 +82,7 @@ namespace common
                     Interval = TimeSpan.FromSeconds(1),
                     Header = new Dictionary<string, List<string>>{ {"Host",new List<string>{"app.pr114.isago.ch"} } },
                     Method = "GET",
+                    Notes = $"http://{address}/info/header",
                 },
                 new AgentServiceCheck{
                     HTTP = $"http://{address}/weatherforecast",
@@ -87,6 +90,7 @@ namespace common
                     Interval = TimeSpan.FromSeconds(1),
                     Header = new Dictionary<string, List<string>>{ {"Host",new List<string>{"app.pr114.isago.ch"} } },
                     Method = "GET",
+                    Notes = $"http://{address}/info/header",
                 },
                 new AgentServiceCheck{
                     HTTP = $"http://{address}/info/health",
@@ -95,7 +99,7 @@ namespace common
                     Header = new Dictionary<string, List<string>>{ {"Host",new List<string>{"app.pr114.isago.ch"} } },
                     Method = "GET",
                     Name = "info/health",
-                    Notes="GET info/health",
+                    Notes = $"http://{address}/info/header",
                 }
             };
 

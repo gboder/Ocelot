@@ -84,8 +84,6 @@ namespace gw
                 .DownstreamRouteHolder()
                 .UpstreamHeadersFindAndReplace()
                 .HostHeaderReplacer().Replace);
-
-                base.InnerHandler
             return base.SendAsync(request, cancellationToken);
         }
     }

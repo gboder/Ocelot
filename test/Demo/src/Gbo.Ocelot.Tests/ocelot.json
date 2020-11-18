@@ -1,76 +1,48 @@
 {
   "Routes": [
     {
-      "ServiceName": "app",
-      "DownstreamPathTemplate": "/weatherforecast",
-      "DownstreamScheme": "http",
-      "UpstreamPathTemplate": "/weatherforecast",
-      "UpstreamHttpMethod": [
-        "Get"
-      ],
-      "LoadBalancerOptions": {
-        "Type": "RoundRobin"
-      },
-      "UpstreamHeaderTransform": {
-        "X-Forwarded-For": "{RemoteIpAddress}",
-        "Host": "localhost:5000, app.pr114.isago.ch"
-      }
-    },
-    {
-      "ServiceName": "app",
-      "DownstreamPathTemplate": "/info/health",
-      "DownstreamScheme": "http",
-      "UpstreamPathTemplate": "/health",
-      "UpstreamHttpMethod": [
-        "Get"
-      ],
-      "LoadBalancerOptions": {
-        "Type": "RoundRobin"
-      },
-      "UpstreamHeaderTransform": {
-        "X-Forwarded-For": "{RemoteIpAddress}",
-        "Host": "localhost:5000, app.pr114.isago.ch"
-      }
-    },
-    {
-      "ServiceName": "app",
-      "DownstreamPathTemplate": "/info/header",
-      "DownstreamScheme": "http",
-      "UpstreamPathTemplate": "/down-header",
-      "UpstreamHttpMethod": [
-        "Get"
-      ],
-      "LoadBalancerOptions": {
-        "Type": "RoundRobin"
-      },
-      "UpstreamHeaderTransform": {
-        "X-Forwarded-For": "{RemoteIpAddress}",
-        "Host": "app.pr114.isago.ch"
-      }
-    },
-    {
-      "ServiceName": "app",
-      "DownstreamPathTemplate": "/info/header",
-      "DownstreamScheme": "http",
-      "UpstreamPathTemplate": "/up-header",
-      "UpstreamHttpMethod": [
-        "Get"
-      ],
-      "LoadBalancerOptions": {
-        "Type": "RoundRobin"
-      },
-      "UpstreamHeaderTransform": {
-        "X-Forwarded-For": "{RemoteIpAddress}",
-        "X-Forwarded-Host": "{UpstreamHost}",
-        "X-App-1": "OcelotValue",
-        "Host": "{UpstreamHost}, app.pr114.isago.ch"
-      }
-    },
-    {
-      "ServiceName": "app",
+      "ServiceName": "insurant",
       "DownstreamPathTemplate": "/info/{everything}",
       "DownstreamScheme": "http",
-      "UpstreamPathTemplate": "/info/{everything}",
+      "UpstreamPathTemplate": "/insurant/{everything}",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "UpstreamHeaderTransform": {
+        "X-Forwarded-For": "{RemoteIpAddress}",
+        "Host": "localhost:5000, app.pr114.isago.ch"
+      },
+      "DelegatingHandlers": [
+        "HostInjectorDelegatingHandler"
+      ]
+    },
+    {
+      "ServiceName": "invoice",
+      "DownstreamPathTemplate": "/info/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/invoice/{everything}",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "UpstreamHeaderTransform": {
+        "X-Forwarded-For": "{RemoteIpAddress}",
+        "Host": "localhost:5000, app.pr114.isago.ch"
+      },
+      "DelegatingHandlers": [
+        "HostInjectorDelegatingHandler"
+      ]
+    },
+    {
+      "ServiceName": "benefit",
+      "DownstreamPathTemplate": "/info/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/benefit/{everything}",
       "UpstreamHttpMethod": [
         "Get"
       ],
@@ -89,8 +61,8 @@
   "GlobalConfiguration": {
     "BaseUrl": "http://localhost:5000",
     "ServiceDiscoveryProvider": {
-      "Host": "localhost",
-      "Port": 8500,
+      "Host": "rp01",
+      "Port": 8520,
       "Type": "Consul"
     }
   }
