@@ -28,9 +28,11 @@ namespace common
                 throw new ArgumentNullException(nameof(configuration));
             }
 
+            var consulUri = new Uri($"http://{Environment.GetEnvironmentVariable("APP_CONSUL_HOST")}");
+
             services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(consulConfig =>
             {
-                consulConfig.Address = new Uri($"http://{Environment.GetEnvironmentVariable("APP_CONSUL_HOST")}");
+                consulConfig.Address = consulUri;
             }));
 
             return services;
@@ -99,8 +101,9 @@ namespace common
 
             // registration.Tags = new string[] { "http://app" };
             // registration.Meta = new Dictionary<string, string> { { "host-header", "http://app:80/" } };
+            var consulUri = new Uri($"http://{Environment.GetEnvironmentVariable("APP_CONSUL_HOST")}");
 
-            logger.LogInformation($"Registering Service {registration.Name} with URL {registration.Address}:{registration.Port}");
+            logger.LogInformation($"Registering Service {registration.Name} with URL {registration.Address}:{registration.Port} to {consulUri}");
             consulClient.Agent.ServiceDeregister(registration.ID).ConfigureAwait(true);
             consulClient.Agent.ServiceRegister(registration).ConfigureAwait(true);
 

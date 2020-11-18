@@ -6,44 +6,75 @@ services:
         hostname: rp01
         container_name: rp01
         ports:
-            - "8500:8500"
+            - "8510:8510"
+            - "8520:8520"
         networks:
             - net01
         volumes:
             - D:/temp/consuldemo/nginx/nginx.conf:/etc/nginx/nginx.conf
-    consul01:
+    consulServerA:
         image: consul:latest
-        command: consul agent -server -client=0.0.0.0 -ui -node=server -datacenter=consuldemo01 -data-dir=/mnt/data/consul -bootstrap-expect=1
-        hostname: consul01
-        container_name: consul01
-        ports:
-            - "8510:8500"
+        command: consul agent -server -ui -node=consulServerA -retry-join consulServerB -retry-join consulServerC -datacenter=consuldemo01 -data-dir=/mnt/data/consul -bootstrap-expect=3 -http-port 8500
+        hostname: consulServerA
+        container_name: consulServerA
         networks: 
             - net01
         volumes:
-            - D:/temp/consuldemo/consul01:/mnt/data/consul
-    consul02:
+            - D:/temp/consuldemo/consulServerA:/mnt/data/consul
+    consulServerB:
         image: consul:latest
-        command: consul agent -client=0.0.0.0 -ui -retry-join consul01 -node=client -datacenter=consuldemo01 -data-dir=/mnt/data/consul
-        hostname: consul02
-        container_name: consul02
-        ports:
-            - "8511:8500"
+        command: consul agent -server -ui -node=consulServerB -retry-join consulServerA -retry-join consulServerC -datacenter=consuldemo01 -data-dir=/mnt/data/consul -bootstrap-expect=3 -http-port 8500
+        hostname: consulServerB
+        container_name: consulServerB
         networks: 
             - net01
         volumes:
-            - D:/temp/consuldemo/consul02:/mnt/data/consul
-    consul03:
+            - D:/temp/consuldemo/consulServerB:/mnt/data/consul
+    consulServerC:
         image: consul:latest
-        command: consul agent -client=0.0.0.0 -retry-join consul02 -node=client2 -datacenter=consuldemo01 -data-dir=/mnt/data/consul
-        hostname: consul03
-        container_name: consul03
-        ports:
-            - "8512:8500"
+        command: consul agent -server -ui -node=consulServerC -retry-join consulServerA -retry-join consulServerB -datacenter=consuldemo01 -data-dir=/mnt/data/consul -bootstrap-expect=3 -http-port 8500
+        hostname: consulServerC
+        container_name: consulServerC
         networks: 
             - net01
         volumes:
-            - D:/temp/consuldemo/consul03:/mnt/data/consul
+            - D:/temp/consuldemo/consulServerC:/mnt/data/consul
+    consulServerD:
+        image: consul:latest
+        command: consul agent -server -ui -node=consulServerD -retry-join consulServerA -retry-join consulServerB -datacenter=consuldemo01 -data-dir=/mnt/data/consul -bootstrap-expect=3 -http-port 8500
+        hostname: consulServerD
+        container_name: consulServerD
+        networks: 
+            - net01
+        volumes:
+            - D:/temp/consuldemo/consulServerD:/mnt/data/consul
+    consulServerE:
+        image: consul:latest
+        command: consul agent -server -ui -node=consulServerE -retry-join consulServerA -retry-join consulServerB -datacenter=consuldemo01 -data-dir=/mnt/data/consul -bootstrap-expect=3 -http-port 8500
+        hostname: consulServerE
+        container_name: consulServerE
+        networks: 
+            - net01
+        volumes:
+            - D:/temp/consuldemo/consulServerE:/mnt/data/consul
+    consulClient01:
+        image: consul:latest
+        command: consul agent -client 0.0.0.0 -ui -node=consulClient01 -retry-join consulServerB -datacenter=consuldemo01 -data-dir=/mnt/data/consul
+        hostname: consulClient01
+        container_name: consulClient01
+        networks: 
+            - net01
+        volumes:
+            - D:/temp/consuldemo/consulClient01:/mnt/data/consul
+    consulClient02:
+        image: consul:latest
+        command: consul agent -client 0.0.0.0 -ui -node=consulClient02 -retry-join consulServerB -datacenter=consuldemo01 -data-dir=/mnt/data/consul
+        hostname: consulClient02
+        container_name: consulClient02
+        networks: 
+            - net01
+        volumes:
+            - D:/temp/consuldemo/consulClient02:/mnt/data/consul
     gw:
         image: consul-demo-gw
         container_name: gw
@@ -60,7 +91,7 @@ services:
         container_name: app1
         environment: 
             ASPNETCORE_ENVIRONMENT: Development
-            APP_CONSUL_HOST: rp01:8500
+            APP_CONSUL_HOST: consulClient01:8500
         networks: 
             - net01
     app2:
@@ -69,7 +100,7 @@ services:
         container_name: app2
         environment: 
             ASPNETCORE_ENVIRONMENT: Development
-            APP_CONSUL_HOST: rp01:8500
+            APP_CONSUL_HOST: consulClient02:8500
         networks: 
             - net01
     app3:
@@ -78,9 +109,18 @@ services:
         container_name: app3
         environment: 
             ASPNETCORE_ENVIRONMENT: Development
-            APP_CONSUL_HOST: rp01:8500
+            APP_CONSUL_HOST: consulClient01:8500
         networks: 
             - net01
-
+    app4:
+        image: consul-demo-app
+        hostname: app4
+        container_name: app4
+        environment: 
+            ASPNETCORE_ENVIRONMENT: Development
+            APP_CONSUL_HOST: consulClient02:8500
+        networks: 
+            - net01
+            
 networks:
     net01:
