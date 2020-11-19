@@ -16,7 +16,7 @@ services:
             - D:/temp/consuldemo/nginx/nginx.conf:/etc/nginx/nginx.conf
     csa:
         image: consul:latest
-        command: consul agent -ui -server -node=csa -retry-join csb -retry-join csc -datacenter=consuldemo01 -data-dir=/mnt/data/consul -bootstrap-expect=3 -http-port 8500
+        command: consul agent -server -node=csa -retry-join csb -retry-join csc -datacenter=consuldemo01 -data-dir=/mnt/data/consul -bootstrap-expect=3
         hostname: csa
         container_name: csa
         networks: 
@@ -25,7 +25,7 @@ services:
             - D:/temp/consuldemo/csa:/mnt/data/consul
     csb:
         image: consul:latest
-        command: consul agent -server -ui -node=csb -retry-join csa -retry-join csc -datacenter=consuldemo01 -data-dir=/mnt/data/consul -bootstrap-expect=3 -http-port 8500
+        command: consul agent -server -node=csb -retry-join csa -retry-join csc -datacenter=consuldemo01 -data-dir=/mnt/data/consul -bootstrap-expect=3
         hostname: csb
         container_name: csb
         networks: 
@@ -34,7 +34,7 @@ services:
             - D:/temp/consuldemo/csb:/mnt/data/consul
     csc:
         image: consul:latest
-        command: consul agent -server -ui -node=csc -retry-join csa -retry-join csb -datacenter=consuldemo01 -data-dir=/mnt/data/consul -bootstrap-expect=3 -http-port 8500
+        command: consul agent -server -node=csc -retry-join csa -retry-join csb -datacenter=consuldemo01 -data-dir=/mnt/data/consul -bootstrap-expect=3
         hostname: csc
         container_name: csc
         networks: 
