@@ -19,7 +19,7 @@ services:
     networks:
       - net01
     volumes:
-      - D:/temp/consuldemo/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker-files/nginx/nginx.conf:/etc/nginx/nginx.conf
   csa:
     image: consul:latest
     command: consul agent -server -ui -node=csa -retry-join csb -retry-join csc -datacenter=consuldemo01 -data-dir=/consul/data -bootstrap-expect=3 -client=0.0.0.0
@@ -87,58 +87,73 @@ services:
     container_name: app1
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      APP_CONSUL_HOST: rp01:8500
+      APP_CONSUL_HOST: localhost:8500
       APP_SERVICE_NAME: benefit
     depends_on:
       - rp01
     networks:
       - net01
+    volumes:
+        - ./docker-files/consul/consul.json:/etc/config/consul.json
+        - ./docker-files/supervisor/conf.d:/etc/supervisor/conf.d
   app2:
     image: consul-demo-app
     hostname: app2
     container_name: app2
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      APP_CONSUL_HOST: rp01:8500
+      APP_CONSUL_HOST: localhost:8500
       APP_SERVICE_NAME: invoice
     depends_on:
       - rp01
     networks:
       - net01
+    volumes:
+        - ./docker-files/consul/consul.json:/etc/config/consul.json
+        - ./docker-files/supervisor/conf.d:/etc/supervisor/conf.d
   app3:
     image: consul-demo-app
     hostname: app3
     container_name: app3
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      APP_CONSUL_HOST: rp01:8500
+      APP_CONSUL_HOST: localhost:8500
       APP_SERVICE_NAME: invoice
     networks:
       - net01
+    volumes:
+        - ./docker-files/consul/consul.json:/etc/config/consul.json
+        - ./docker-files/supervisor/conf.d:/etc/supervisor/conf.d
   app4:
     image: consul-demo-app
     hostname: app4
     container_name: app4
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      APP_CONSUL_HOST: rp01:8500
+      APP_CONSUL_HOST: localhost:8500
       APP_SERVICE_NAME: insurant
     depends_on:
       - rp01
     networks:
       - net01
+    volumes:
+        - ./docker-files/consul/consul.json:/etc/config/consul.json
+        - ./docker-files/supervisor/conf.d:/etc/supervisor/conf.d
   app5:
     image: consul-demo-app
     hostname: app5
     container_name: app5
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      APP_CONSUL_HOST: rp01:8500
+      APP_CONSUL_HOST: localhost:8500
       APP_SERVICE_NAME: insurant
     depends_on:
       - rp01
     networks:
       - net01
+    volumes:
+        - ./docker-files/consul/consul.json:/etc/config/consul.json
+        - ./docker-files/supervisor/conf.d:/etc/supervisor/conf.d
 
 networks:
   net01:

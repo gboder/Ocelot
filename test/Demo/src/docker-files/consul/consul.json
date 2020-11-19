@@ -1,6 +1,7 @@
 {
   "retry_join" : ["csa","csb","csc"],
   "data_dir": "/mnt/data/consul",
+  "datacenter": "consuldemo01",
   "log_level": "INFO",
   "addresses": {
     "http": "0.0.0.0"

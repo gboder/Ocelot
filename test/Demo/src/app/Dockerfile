@@ -10,4 +10,4 @@ WORKDIR /app
 COPY published/ ./
 
 #ENTRYPOINT ["dotnet", "app.dll"]
-CMD ["/usr/bin/supervisord"]
+CMD ["supervisord","-n","-e","debug"]
