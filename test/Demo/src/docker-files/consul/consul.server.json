@@ -1,0 +1,12 @@
+{
+  "retry_join" : ["csa","csb","csc"],
+  "data_dir": "/mnt/data/consul",
+  "datacenter": "consuldemo01",
+  "log_level": "INFO",
+  "server": "true",
+  "addresses": {
+    "http": "0.0.0.0"
+  },
+  "bind_addr": "0.0.0.0",
+  "ui": true
+}
