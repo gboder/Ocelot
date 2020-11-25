@@ -1,5 +1,9 @@
 {
-  "retry_join" : ["csa","csb","csc"],
+  "retry_join": [
+    "csa",
+    "csb",
+    "csc"
+  ],
   "data_dir": "/mnt/data/consul",
   "datacenter": "consuldemo01",
   "log_level": "INFO",
@@ -7,5 +11,21 @@
     "http": "0.0.0.0"
   },
   "bind_addr": "0.0.0.0",
-  "ui": true
+  "ui": true,
+  "encrypt": "o5pzPxkR/ee8XjIhR6xuDxIAiy+82QPMrGcWZsYiz5c=",
+  "verify_incoming": false,
+  "verify_outgoing": true,
+  "verify_server_hostname": true,
+  "ca_file": "/mnt/data/consul/ssl/consul-agent-ca.pem",
+  "auto_encrypt": {
+    "tls": true
+  },
+  "acl": {
+    "enabled": true,
+    "default_policy": "deny",
+    "enable_token_persistence": true,
+    "tokens": {
+      "default": "ee0471da-6441-49a3-a598-1ac1874a6eaf"
+    }
+  }
 }

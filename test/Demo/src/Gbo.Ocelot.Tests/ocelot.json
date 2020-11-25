@@ -56,6 +56,30 @@
       "DelegatingHandlers": [
         "HostInjectorDelegatingHandler"
       ]
+    },
+    {
+      "DownstreamPathTemplate": "/info/env",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/env",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "app1",
+          "Port": 443
+        }
+      ],
+      "UpstreamHeaderTransform": {
+        "X-Forwarded-For": "{RemoteIpAddress}",
+        "Host": "localhost:5000, app.pr114.isago.ch"
+      },
+      "DelegatingHandlers": [
+        "HostInjectorDelegatingHandler"
+      ]
     }
   ],
   "GlobalConfiguration": {
