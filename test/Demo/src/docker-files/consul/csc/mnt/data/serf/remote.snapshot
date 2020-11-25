@@ -11,3 +11,9 @@ alive: csc.consuldemo01 172.22.0.4:8302
 alive: csb.consuldemo01 172.22.0.5:8302
 alive: csa.consuldemo01 172.22.0.7:8302
 clock: 6
+alive: csc.consuldemo01 172.23.0.5:8302
+alive: csb.consuldemo01 172.23.0.3:8302
+alive: csa.consuldemo01 172.23.0.7:8302
+clock: 7
+clock: 8
+clock: 9

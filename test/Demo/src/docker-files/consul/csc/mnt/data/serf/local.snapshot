@@ -61,3 +61,26 @@ clock: 28
 alive: app2 172.22.0.11:8301
 clock: 29
 clock: 30
+alive: csc 172.23.0.5:8301
+alive: csb 172.23.0.3:8301
+clock: 31
+alive: csa 172.23.0.7:8301
+clock: 32
+clock: 33
+event-clock: 5
+event-clock: 6
+alive: app2 172.23.0.10:8301
+alive: app4 172.23.0.11:8301
+alive: app5 172.23.0.9:8301
+alive: app1 172.23.0.12:8301
+alive: app3 172.23.0.6:8301
+clock: 34
+event-clock: 7
+not-alive: app1
+alive: app1 172.23.0.12:8301
+clock: 35
+clock: 36
+clock: 37
+clock: 38
+clock: 39
+clock: 40

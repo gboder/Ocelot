@@ -87,7 +87,8 @@
     "ServiceDiscoveryProvider": {
       "Host": "rp01",
       "Port": 8500,
-      "Type": "Consul"
+      "Type": "Consul",
+      "Token": "7c28b655-1ce0-d98e-7d5f-644681be3d95"
     }
   }
 }
