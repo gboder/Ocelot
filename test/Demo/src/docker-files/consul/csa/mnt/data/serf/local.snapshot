@@ -1,19 +1,19 @@
-alive: csb 172.22.0.5:8301
 alive: csa 172.22.0.6:8301
+alive: csb 172.22.0.5:8301
 alive: csc 172.22.0.7:8301
 clock: 2
 clock: 3
 event-clock: 1
-alive: csb 172.22.0.5:8301
 alive: csa 172.22.0.6:8301
+alive: csb 172.22.0.5:8301
 clock: 4
 alive: csc 172.22.0.7:8301
 clock: 5
 event-clock: 2
-alive: csb 172.22.0.5:8301
+alive: csa 172.22.0.7:8301
 alive: csc 172.22.0.4:8301
 clock: 6
-alive: csa 172.22.0.7:8301
+alive: csb 172.22.0.5:8301
 clock: 8
 event-clock: 3
 event-clock: 4
@@ -23,23 +23,19 @@ alive: app2 172.22.0.11:8301
 alive: app4 172.22.0.8:8301
 alive: app5 172.22.0.6:8301
 clock: 10
+not-alive: app4
 clock: 11
 not-alive: app5
-not-alive: app4
 not-alive: app2
 not-alive: app3
 alive: app1 172.22.0.12:8301
-clock: 12
 clock: 13
 alive: app4 172.22.0.8:8301
-clock: 14
-alive: app5 172.22.0.6:8301
 clock: 15
+alive: app5 172.22.0.6:8301
 alive: app2 172.22.0.11:8301
-clock: 16
 clock: 17
 alive: app3 172.22.0.3:8301
-clock: 18
 clock: 19
 not-alive: app1
 alive: app1 172.22.0.12:8301
@@ -53,13 +49,10 @@ not-alive: app3
 clock: 22
 clock: 23
 alive: app1 172.22.0.3:8301
-clock: 25
 clock: 26
 alive: app4 172.22.0.8:8301
-clock: 27
 alive: app3 172.22.0.12:8301
-alive: app5 172.22.0.6:8301
 clock: 28
+alive: app5 172.22.0.6:8301
 alive: app2 172.22.0.11:8301
-clock: 29
 clock: 30

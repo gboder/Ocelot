@@ -27,7 +27,7 @@ services:
     hostname: csa
     container_name: csa
     volumes:
-      - ./docker-files/consul/csb/mnt/data:/consul/data
+      - ./docker-files/consul/csa/mnt/data:/consul/data
       - ./docker-files/consul/all/policy:/consul/policy
     networks:
       - net01
@@ -52,7 +52,7 @@ services:
     hostname: csc
     container_name: csc
     volumes:
-      - ./docker-files/consul/csb/mnt/data:/consul/data
+      - ./docker-files/consul/csc/mnt/data:/consul/data
       - ./docker-files/consul/all/policy:/consul/policy
       # - ./docker-files/consul/consul.server.json:/etc/config/consul.json
       # - ./docker-files/consul/csc/mnt/data:/mnt/data/consul
@@ -103,6 +103,7 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       APP_CONSUL_HOST: localhost:8500
       APP_SERVICE_NAME: benefit
+      APP_CONSUL_TOKEN: bb785079-6544-e2b2-df63-693291918719
     depends_on:
       - rp01
     networks:
@@ -110,7 +111,7 @@ services:
     volumes:
         - ./docker-files/consul/consul.client.json:/etc/config/consul.json
         - ./docker-files/supervisor/conf.d:/etc/supervisor/conf.d
-        - ./docker-files/consul/client/ssl:/mnt/data/consul/ssl
+        - ./docker-files/consul/all/ssl/:/mnt/data/consul/ssl/
   app2:
     image: consul-demo-app
     hostname: app2
@@ -119,6 +120,7 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       APP_CONSUL_HOST: localhost:8500
       APP_SERVICE_NAME: invoice
+      APP_CONSUL_TOKEN: bb785079-6544-e2b2-df63-693291918719
     depends_on:
       - rp01
     networks:
@@ -126,7 +128,7 @@ services:
     volumes:
         - ./docker-files/consul/consul.client.json:/etc/config/consul.json
         - ./docker-files/supervisor/conf.d:/etc/supervisor/conf.d
-        - ./docker-files/consul/client/ssl:/mnt/data/consul/ssl
+        - ./docker-files/consul/all/ssl/:/mnt/data/consul/ssl/
   app3:
     image: consul-demo-app
     hostname: app3
@@ -135,12 +137,13 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       APP_CONSUL_HOST: localhost:8500
       APP_SERVICE_NAME: invoice
+      APP_CONSUL_TOKEN: bb785079-6544-e2b2-df63-693291918719
     networks:
       - net01
     volumes:
         - ./docker-files/consul/consul.client.json:/etc/config/consul.json
         - ./docker-files/supervisor/conf.d:/etc/supervisor/conf.d
-        - ./docker-files/consul/client/ssl:/mnt/data/consul/ssl
+        - ./docker-files/consul/all/ssl/:/mnt/data/consul/ssl/
   app4:
     image: consul-demo-app
     hostname: app4
@@ -149,6 +152,7 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       APP_CONSUL_HOST: localhost:8500
       APP_SERVICE_NAME: insurant
+      APP_CONSUL_TOKEN: bb785079-6544-e2b2-df63-693291918719
     depends_on:
       - rp01
     networks:
@@ -156,7 +160,7 @@ services:
     volumes:
         - ./docker-files/consul/consul.client.json:/etc/config/consul.json
         - ./docker-files/supervisor/conf.d:/etc/supervisor/conf.d
-        - ./docker-files/consul/client/ssl:/mnt/data/consul/ssl
+        - ./docker-files/consul/all/ssl/:/mnt/data/consul/ssl/
   app5:
     image: consul-demo-app
     hostname: app5
@@ -165,6 +169,7 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       APP_CONSUL_HOST: localhost:8500
       APP_SERVICE_NAME: insurant
+      APP_CONSUL_TOKEN: bb785079-6544-e2b2-df63-693291918719
     depends_on:
       - rp01
     networks:
@@ -172,7 +177,7 @@ services:
     volumes:
         - ./docker-files/consul/consul.client.json:/etc/config/consul.json
         - ./docker-files/supervisor/conf.d:/etc/supervisor/conf.d
-        - ./docker-files/consul/client/ssl:/mnt/data/consul/ssl
+        - ./docker-files/consul/all/ssl/:/mnt/data/consul/ssl/
 
 networks:
   net01:

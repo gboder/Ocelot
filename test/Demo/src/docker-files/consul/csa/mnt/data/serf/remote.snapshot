@@ -1,14 +1,13 @@
-alive: csb.consuldemo01 172.22.0.5:8302
 alive: csa.consuldemo01 172.22.0.6:8302
+alive: csb.consuldemo01 172.22.0.5:8302
 alive: csc.consuldemo01 172.22.0.7:8302
-clock: 1
+clock: 2
 clock: 3
-alive: csb.consuldemo01 172.22.0.5:8302
 alive: csa.consuldemo01 172.22.0.6:8302
+alive: csb.consuldemo01 172.22.0.5:8302
 alive: csc.consuldemo01 172.22.0.7:8302
 clock: 4
-alive: csb.consuldemo01 172.22.0.5:8302
-alive: csc.consuldemo01 172.22.0.4:8302
 alive: csa.consuldemo01 172.22.0.7:8302
-clock: 5
+alive: csc.consuldemo01 172.22.0.4:8302
+alive: csb.consuldemo01 172.22.0.5:8302
 clock: 6

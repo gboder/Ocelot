@@ -33,6 +33,7 @@ namespace common
             services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(consulConfig =>
             {
                 consulConfig.Address = consulUri;
+                consulConfig.Token = Environment.GetEnvironmentVariable("APP_CONSUL_TOKEN");
             }));
 
             return services;

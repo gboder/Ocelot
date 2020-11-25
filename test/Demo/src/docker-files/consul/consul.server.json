@@ -7,7 +7,7 @@
   "data_dir": "/consul/data",
   "bootstrap_expect": 3,
   "datacenter": "consuldemo01",
-  "log_level": "DEBUG",
+  "log_level": "INFO",
   "server": true,
   "addresses": {
     "http": "0.0.0.0"
@@ -21,6 +21,7 @@
   "ca_file": "/consul/ssl/consul-agent-ca.pem",
   "cert_file": "/consul/ssl/agent.pem",
   "key_file": "/consul/ssl/agent-key.pem",
+  "recursors": ["127.0.0.11","192.168.114.239"],
   "auto_encrypt": {
     "allow_tls": true
   },
@@ -29,8 +30,7 @@
     "default_policy": "deny",
     "enable_token_persistence": true,
     "tokens": {
-      "master": "3b623a30-3b9d-6d58-8252-d07099c5c998",
-      "default": "ee0471da-6441-49a3-a598-1ac1874a6eaf"
+      "default": "49a7b6e0-5d8b-25a6-3fa3-2488cd44a8c9"
     }
   }
 }
