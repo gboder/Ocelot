@@ -179,5 +179,22 @@ services:
         - ./docker-files/supervisor/conf.d:/etc/supervisor/conf.d
         - ./docker-files/consul/all/ssl/:/mnt/data/consul/ssl/
 
+  app6:
+    image: consul-demo-app
+    hostname: app6
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      APP_CONSUL_HOST: localhost:8500
+      APP_SERVICE_NAME: insurant
+      APP_CONSUL_TOKEN: bb785079-6544-e2b2-df63-693291918719
+    depends_on:
+      - rp01
+    networks:
+      - net01
+    volumes:
+        - ./docker-files/consul/consul.client.json:/etc/config/consul.json
+        - ./docker-files/supervisor/conf.d:/etc/supervisor/conf.d
+        - ./docker-files/consul/all/ssl/:/mnt/data/consul/ssl/
+
 networks:
   net01:
